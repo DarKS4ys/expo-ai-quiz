@@ -28,7 +28,8 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-secure-store"
     ],
     "extra": {
       "clerkPublishableKey": "pk_test_YXNzdXJpbmctY2hpcG11bmstNTMuY2xlcmsuYWNjb3VudHMuZGV2JA"

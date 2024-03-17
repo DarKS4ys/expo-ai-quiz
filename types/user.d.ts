@@ -1,6 +1,7 @@
 export type User = {
   id: string;
   name: any;
-  points: any;
-  highScore: any;
+  points: number;
+  highScore: number;
+  imageUrl: string;
 };

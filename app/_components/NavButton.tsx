@@ -22,8 +22,6 @@ export default function NavButton({
   children: React.ReactNode;
   colorScheme: 'light' | 'dark';
 }) {
-  const primaryColor = colorScheme === 'dark' ? 'white' : 'black';
-  const isDarkMode = colorScheme === 'dark';
   const isActive = pathname == href;
 
   const handlePush = () => {

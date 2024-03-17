@@ -1,8 +1,8 @@
-import { Stack, router, useLocalSearchParams, useNavigation } from 'expo-router';
+import { router, useLocalSearchParams, useNavigation } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Pressable, SafeAreaView, Text } from 'react-native';
-import { fetchQuizById } from '../../lib/db';
-import { Quiz } from '../../types/quiz';
+import { fetchQuizById } from '../../../lib/db';
+import { Quiz } from '../../../types/quiz';
 import clsx from 'clsx';
 import { useColorScheme } from 'nativewind';
 

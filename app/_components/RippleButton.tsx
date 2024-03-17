@@ -18,6 +18,7 @@ interface RippleButtonProps {
   className?: string;
   styling?: boolean;
   dark?: boolean;
+  rounded?:boolean;
 }
 
 const RippleButton: React.FC<RippleButtonProps> = ({
@@ -27,7 +28,8 @@ const RippleButton: React.FC<RippleButtonProps> = ({
   children,
   className,
   styling,
-  dark
+  dark,
+  rounded
 }) => {
   const rippleEffect = () => {
     if (Platform.OS === 'android') {
@@ -52,9 +54,10 @@ const RippleButton: React.FC<RippleButtonProps> = ({
       <View
         className={clsx(
           disabled && 'opacity-50',
+          rounded ? 'rounded-2xl' : 'rounded',
+          styling ? 'bg-white shadow-xl shadow-black/70 p-4 w-full my-2 rounded-xl dark:bg-[#292929]'
+          : 'rounded justify-center items-center bg-blue-400 p-4',
           className,
-          styling ? 'bg-white shadow-xl shadow-black/70 p-4 w-[47.7%] my-2 rounded-2xl dark:bg-[#292929]'
-          : 'rounded justify-center items-center'
         )}
       >
         {loading ? (

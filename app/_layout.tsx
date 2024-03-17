@@ -1,64 +1,69 @@
-import { Stack, useLocalSearchParams } from 'expo-router';
-import { useColorScheme } from 'nativewind';
-import React from 'react';
-import Navigator from './_components/Navigator';
-import { Text } from 'react-native';
-import { Constants } from 'expo-constants';
+import { ClerkProvider, useAuth, useUser } from '@clerk/clerk-expo';
+import { Slot, useRouter, useSegments } from 'expo-router';
+import { useEffect } from 'react';
+import * as SecureStore from 'expo-secure-store';
+import { fetchUserById, updateUser } from '../lib/db';
 
-export default function RootLayout() {
-  const { colorScheme, toggleColorScheme } = useColorScheme();
-  const headerTintColor = colorScheme === 'dark' ? 'white' : 'black';
-  const headerBackgroundColor = colorScheme === 'light' ? 'white' : '#0F0F0F'; // #1C1C1C
-  const params = useLocalSearchParams();
+const tokenCache = {
+  async getToken(key: string) {
+    try {
+      return SecureStore.getItemAsync(key);
+    } catch (err) {
+      return null;
+    }
+  },
+  async saveToken(key: string, value: string) {
+    try {
+      return SecureStore.setItemAsync(key, value);
+    } catch (err) {
+      return;
+    }
+  },
+};
 
-  return (
-    <>
-      <Stack
-        screenOptions={{
-          headerTintColor: headerTintColor,
-          headerStyle: {
-            backgroundColor: headerBackgroundColor,
-          },
-        }}
-      >
-        <Stack.Screen
-          name="homepage"
-          options={{
-            headerTitle: 'Anasayfa',
-          }}
-        />
-        <Stack.Screen
-          name="quiz/[id]"
-          options={{
-            headerTitle: 'Testler',
-          }}
-        />
-        <Stack.Screen
-          name="leaderboard"
-          options={{
-            headerTitle: 'Sıralama',
-          }}
-        />
-        <Stack.Screen
-          name="explore"
-          options={{
-            headerTitle: 'Keşfet',
-          }}
-        />
-        <Stack.Screen
-          name="assistant"
-          options={{
-            headerTitle: 'Asistan',
-          }}
-        />
-        <Stack.Screen
-          name="user"
-          options={{
-            headerTitle: 'Hesap',
-          }}
-        />
-      </Stack>
-      <Navigator colorScheme={colorScheme} />
-    </>
-  );
+function Layout() {
+  const { isLoaded, isSignedIn } = useAuth();
+  const segments = useSegments();
+  const router = useRouter();
+  const { user } = useUser();
+
+  useEffect(() => {
+    if (!isLoaded) return;
+
+    const inTabsGroup = segments[0] === '(protected)';
+
+    if (isSignedIn && !inTabsGroup) {
+      router.replace('/homepage');
+    } else if (!isSignedIn && inTabsGroup) {
+      router.replace('/');
+    }
+
+    if (isSignedIn && user) {
+      fetchUserById(user.id, (userData) => {
+        if (!userData) {
+          updateUser(user.id, {
+            name: user.fullName,
+            points: 0,
+            highScore: 0,
+            imageUrl: user.imageUrl,
+          });
+        }
+      });
+    }
+  }, [isSignedIn, segments, user]);
+
+  return <Slot />;
 }
+
+const RootLayout = () => {
+  return (
+    <ClerkProvider
+      tokenCache={tokenCache}
+      publishableKey={'pk_test_aW1tZW5zZS1lZnQtNzEuY2xlcmsuYWNjb3VudHMuZGV2JA'}
+    >
+      <Layout />
+    </ClerkProvider>
+  );
+};
+
+export default RootLayout;
