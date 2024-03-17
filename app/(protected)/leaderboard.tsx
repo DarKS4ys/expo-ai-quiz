@@ -155,7 +155,7 @@ export default function Leaderboard() {
           </View>
         </View>
 
-        <View className="flex pt-4 space-y-3">
+        <View className="flex pt-4 space-y-3.5">
           {users.slice(3).map((user, index) => (
             <Animated.View
             entering={FadeInDown.duration(1000).springify().delay(300 + (150 * index))}
@@ -165,7 +165,7 @@ export default function Leaderboard() {
                 isDarkMode ? 'bg-white/5' : 'bg-black/5'
               )}
             >
-              <View className="items-center flex-row space-x-2">
+              <View className="items-center flex-row space-x-2.5">
                 <Text className="dark:text-white opacity-50">{index + 4}</Text>
                 <Image
                   width={150}
@@ -178,7 +178,7 @@ export default function Leaderboard() {
                 </Text>
               </View>
               <Text
-                className={cn(isDarkMode ? 'text-[#4C1D95]' : 'text-[#6D28D9]')}
+                className={cn(isDarkMode ? 'text-violet-600' : 'text-violet-900')}
               >
                 {user?.highScore}
               </Text>
