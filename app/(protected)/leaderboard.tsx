@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useColorScheme } from 'nativewind';
 import React, { useEffect, useState } from 'react';
-import { Image, SafeAreaView, Text, View } from 'react-native';
+import { Image, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { cn } from '../../lib/utils';
 import { useUser } from '@clerk/clerk-expo';
 import { User } from '../../types/user';
@@ -96,14 +96,14 @@ export default function Leaderboard() {
   }, []);
 
   return (
-    <SafeAreaView
+    <ScrollView
       className={clsx('h-full', isDarkMode ? 'bg-[#0F0F0F]' : 'bg-[#FAFAFA]')}
     >
       <Image
         className="h-full w-full absolute"
         source={require('../../assets/background2.png')}
       />
-      <View className="flex gap-y-6  px-6 py-4 pt-24">
+      <View className="flex gap-y-6 px-6 py-4 pt-24">
         <View className="flex gap-y-1">
           <Text className="dark:text-white text-[26px] leading-[1] font-semibold">
             Liderlik tablosu
@@ -115,7 +115,7 @@ export default function Leaderboard() {
 
         <View className="flex-row items-end justify-around pt-8">
           <View className="items-center space-y-3">
-            <Circle delay={200} name={users[1]?.name} color="gray" size="md">
+            <Circle delay={250} name={users[1]?.name} color="gray" size="md">
               <Image
                 width={150}
                 height={150}
@@ -128,7 +128,7 @@ export default function Leaderboard() {
             </Text>
           </View>
           <View className="items-center space-y-3">
-            <Circle name={users[0]?.name} color="yellow" size="lg">
+            <Circle delay={50} name={users[0]?.name} color="yellow" size="lg">
               <Image
                 width={200}
                 height={200}
@@ -156,36 +156,37 @@ export default function Leaderboard() {
         </View>
 
         <View className="flex pt-4 space-y-3.5">
-          {users.slice(3).map((user, index) => (
+          {users.slice(3).map((userItem, index) => (
             <Animated.View
-            entering={FadeInDown.duration(1000).springify().delay(300 + (150 * index))}
+            entering={FadeInDown.duration(1000).springify().delay(350 + (150 * index))}
               key={index}
               className={cn(
                 'rounded-2xl  items-center justify-between w-full flex-row space-x-4 px-6 py-4',
-                isDarkMode ? 'bg-white/5' : 'bg-black/5'
+                isDarkMode ? 'bg-white/5' : 'bg-black/5',
+                userItem.id === user?.id && 'bg-violet-600' 
               )}
             >
               <View className="items-center flex-row space-x-2.5">
-                <Text className="dark:text-white opacity-50">{index + 4}</Text>
+                <Text className={cn("dark:text-white", userItem.id !== user?.id && 'opacity-50')}>{index + 4}</Text>
                 <Image
                   width={150}
                   height={150}
                   className="rounded-full w-12 h-12"
-                  source={{ uri: user?.imageUrl || placeholderUrl }}
+                  source={{ uri: userItem?.imageUrl || placeholderUrl }}
                 />
                 <Text className="dark:text-white font-medium">
-                  {user?.name}
+                  {userItem?.name}
                 </Text>
               </View>
               <Text
-                className={cn(isDarkMode ? 'text-violet-600' : 'text-violet-900')}
+                className={cn( userItem.id === user?.id ? 'text-white' : isDarkMode ? 'text-violet-600' : 'text-violet-900')}
               >
-                {user?.highScore}
+                {userItem?.highScore}
               </Text>
             </Animated.View>
           ))}
         </View>
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 }

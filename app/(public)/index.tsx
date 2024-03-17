@@ -226,7 +226,7 @@ export default function index() {
               >
                 <Text className="dark:text-white">Hesabın yok mu? </Text>
                 <TouchableOpacity onPress={() => router.push('sign-up')}>
-                  <Text className="text-sky-600">Kayıt Ol</Text>
+                  <Text className="text-violet-600">Kayıt Ol</Text>
                 </TouchableOpacity>
               </Animated.View>
               {/* <Pressable onPress={() => router.push('/homepage')}><Text className='dark:text-white'>GO HOME</Text></Pressable> */}

@@ -263,7 +263,7 @@ export default function SignUp() {
               >
                 <Text className="dark:text-white">Zaten hesabın var mı? </Text>
                 <TouchableOpacity onPress={() => router.push('/')}>
-                  <Text className="text-sky-600">Giriş Yap</Text>
+                  <Text className="text-violet-600">Giriş Yap</Text>
                 </TouchableOpacity>
               </Animated.View>
             </>

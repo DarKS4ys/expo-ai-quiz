@@ -54,9 +54,9 @@ const RippleButton: React.FC<RippleButtonProps> = ({
       <View
         className={clsx(
           disabled && 'opacity-50',
-          rounded ? 'rounded-2xl' : 'rounded',
           styling ? 'bg-white shadow-xl shadow-black/70 p-4 w-full my-2 rounded-xl dark:bg-[#292929]'
           : 'rounded justify-center items-center bg-blue-400 p-4',
+          rounded ? 'rounded-2xl' : 'rounded',
           className,
         )}
       >
