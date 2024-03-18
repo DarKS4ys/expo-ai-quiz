@@ -28,10 +28,7 @@ export default function QuizCard({
       <RippleButton
         rounded
         onPress={() =>
-          router.push({
-            pathname: '/quiz/[id]',
-            params: { id: quiz.id },
-          })
+          router.push(`quiz/${quiz.id}`)
         }
         dark={isDarkMode}
         styling

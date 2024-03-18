@@ -11,7 +11,7 @@ import {
 } from 'firebase/firestore';
 import { db } from './firebase';
 import { User } from '../types/user';
-import { Quiz } from '../types/quiz';
+import { Question, Quiz } from '../types/quiz';
 
 export const updateUser = async (userId: string, userData: Partial<User>): Promise<void> => {
   const userDocRef = doc(db, 'users', userId);
@@ -77,17 +77,22 @@ export const fetchQuizzes = async (): Promise<Quiz[]> => {
   const quizzesRef = collection(db, 'quizzes');
   const quizSnapshot = await getDocs(quizzesRef);
 
-  const quizzes: Quiz[] = quizSnapshot.docs.map((doc) => {
+  const quizzes: Quiz[] = await Promise.all(quizSnapshot.docs.map(async (doc) => {
     const quizData = doc.data();
+    const questionsRef = collection(doc.ref, 'questions');
+    const questionsSnapshot = await getDocs(questionsRef);
+    const questions = questionsSnapshot.docs.map((questionDoc) => questionDoc.data()) as Question[];
+
     return {
       name: quizData.name,
-      questions: quizData.questions,
+      questions: questions.length,
       image: quizData.image,
       id: doc.id,
+      questionsData: questions,
     };
-  });
+  }));
 
-  return quizzes
+  return quizzes;
 };
 
 export const fetchQuizById = async (quizId: string): Promise<Quiz | null> => {
@@ -97,11 +102,16 @@ export const fetchQuizById = async (quizId: string): Promise<Quiz | null> => {
   if (quizDocSnapshot.exists()) {
     const quizData = quizDocSnapshot.data();
     if (quizData) {
+      const questionsRef = collection(quizDocRef, 'questions');
+      const questionsSnapshot = await getDocs(questionsRef);
+      const questions = questionsSnapshot.docs.map((questionDoc) => questionDoc.data()) as Question[];
+
       return {
         name: quizData.name,
-        questions: quizData.questions,
+        questions: questions.length,
         image: quizData.image,
         id: quizDocSnapshot.id,
+        questionsData: questions,
       };
     }
   }

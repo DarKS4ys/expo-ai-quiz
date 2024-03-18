@@ -104,55 +104,54 @@ export default function Explore() {
           </Animated.View>
         </View>
 
-        {/*         <View className="flex flex-row flex-wrap justify-between w-full">
-          {users && !loading ? (
-            users.map((user, i) => (
-              <UserCard key={i} index={i} isDarkMode={isDarkMode} user={user} />
-            ))
-          ) : (
-            <View className="w-full h-full items-center justify-center">
-              <ActivityIndicator size="large" color={primaryColor} />
-            </View>
-          )}
-        </View>
- */}
-        <ScrollView
-          horizontal
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-          className="flex-row h-64 w-full "
-        >
-          {users && !loading ? (
-            users.map((user, i) => (
-              <Animated.View
-                className={clsx('h-full', i % 2 === 0 && 'mr-2', 'last:ml-2')}
-                style={{ width: PAGE_WIDTH * 0.4287 }}
-                key={i}
+        <View className="space-y-3">
+          <Text
+            className={clsx(
+              'dark:text-white z-20 text-2xl font-semibold text-center'
+            )}
+          >
+            Kullanıcılar
+          </Text>
+          <ScrollView
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            className="flex-row h-64 w-full "
+          >
+            {users && !loading ? (
+              users.map((user, i) => (
+                <Animated.View
+                  className={clsx('h-full', i % 2 === 0 && 'mr-2', 'last:ml-2')}
+                  style={{ width: PAGE_WIDTH * 0.4287 }}
+                  key={i}
+                >
+                  <UserCard
+                    full
+                    index={i}
+                    isDarkMode={isDarkMode}
+                    user={user}
+                  />
+                </Animated.View>
+              ))
+            ) : (
+              <View
+                style={{ width: PAGE_WIDTH * 0.887 }}
+                className="w-full h-full items-center justify-center"
               >
-                <UserCard full index={i} isDarkMode={isDarkMode} user={user} />
-              </Animated.View>
-            ))
-          ) : (
-            <View
-              style={{ width: PAGE_WIDTH * 0.887 }}
-              className="w-full h-full items-center justify-center"
-            >
-              <ActivityIndicator size="large" color={primaryColor} />
-            </View>
-          )}
-        </ScrollView>
+                <ActivityIndicator size="large" color={primaryColor} />
+              </View>
+            )}
+          </ScrollView>
+        </View>
 
         <View className="space-y-3 mt-4">
-          <View>
-            <Text
-              className={clsx(
-                'dark:text-white z-20 text-2xl font-semibold text-center',
-              )}
-            >
-              Testler
-            </Text>
-            <View className='absolute top-1/2 h-1 bg-white w-full'/>
-          </View>
+          <Text
+            className={clsx(
+              'dark:text-white z-20 text-2xl font-semibold text-center'
+            )}
+          >
+            Testler
+          </Text>
           <View className="flex flex-row flex-wrap justify-between w-full">
             {quizzes && !loading ? (
               quizzes.map((quiz, i) => (

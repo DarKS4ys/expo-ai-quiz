@@ -105,10 +105,10 @@ export default function Leaderboard() {
       />
       <View className="flex gap-y-6 px-6 py-4 pt-24">
         <View className="flex gap-y-1">
-          <Text className="dark:text-white text-[26px] leading-[1] font-semibold">
+          <Text className="text-white text-[26px] leading-[1] font-semibold">
             Liderlik tablosu
           </Text>
-          <Text className="dark:text-white text- opacity-60">
+          <Text className="text-white text- opacity-60">
             Sadece en pro elemanlar burada 😎
           </Text>
         </View>
