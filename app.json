@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "ai-quiz",
-    "slug": "ai-quiz",
-    "scheme": "ai-quiz",
+    "name": "Intelli",
+    "slug": "intelli",
+    "scheme": "intelli",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#442574"
     },
     "assetBundlePatterns": [
       "**/*"
