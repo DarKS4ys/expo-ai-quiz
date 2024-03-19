@@ -153,7 +153,7 @@ export default function SummaryPage() {
             entering={FadeInDown.duration(1000).springify().delay(650)}
             className="pt-4"
           >
-            <Button onPress={handleReturn} styling2>
+            <Button disabled={loading} onPress={handleReturn} styling2>
               <Text className="text-xl font-semibold">Geri Dön</Text>
             </Button>
           </Animated.View>
