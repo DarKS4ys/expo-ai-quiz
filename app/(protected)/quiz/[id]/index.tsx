@@ -116,7 +116,7 @@ export default function QuizPage() {
                 'p-6 rounded-2xl flex-row items-center space-x-8'
               )}
             >
-              <Text className="dark:text-white font-medium text-lg">{i}</Text>
+              <Text className="dark:text-white font-medium text-lg">{i + 1}</Text>
               <Text className="dark:text-white font-medium line-clamp-1 text-lg">
                 {question.title}
               </Text>

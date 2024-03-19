@@ -22,7 +22,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.darks4ys.aiquiz"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -32,7 +33,13 @@
       "expo-secure-store"
     ],
     "extra": {
-      "clerkPublishableKey": "pk_test_YXNzdXJpbmctY2hpcG11bmstNTMuY2xlcmsuYWNjb3VudHMuZGV2JA"
+      "clerkPublishableKey": "pk_test_YXNzdXJpbmctY2hpcG11bmstNTMuY2xlcmsuYWNjb3VudHMuZGV2JA",
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "ab6b5ece-099a-47b8-ad4a-f64a210dcc8f"
+      }
     }
   }
 }

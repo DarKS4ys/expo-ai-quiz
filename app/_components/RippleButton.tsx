@@ -19,6 +19,8 @@ interface RippleButtonProps {
   styling?: boolean;
   dark?: boolean;
   rounded?:boolean;
+  correct?: boolean;
+  mistake?: boolean;
 }
 
 const RippleButton: React.FC<RippleButtonProps> = ({
@@ -29,7 +31,9 @@ const RippleButton: React.FC<RippleButtonProps> = ({
   className,
   styling,
   dark,
-  rounded
+  rounded,
+  correct,
+  mistake
 }) => {
   const rippleEffect = () => {
     if (Platform.OS === 'android') {
@@ -58,6 +62,8 @@ const RippleButton: React.FC<RippleButtonProps> = ({
           : 'rounded justify-center items-center bg-blue-400 p-4',
           rounded ? 'rounded-2xl' : 'rounded',
           className,
+          mistake && 'bg-red-500',
+          correct && 'bg-green-500',
         )}
       >
         {loading ? (

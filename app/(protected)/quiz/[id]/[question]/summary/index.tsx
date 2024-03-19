@@ -8,17 +8,17 @@ import {
   Text,
   View,
 } from 'react-native';
-import { Question, Quiz } from '../../../../../types/quiz';
 import { useColorScheme } from 'nativewind';
-import { TopBar } from '../../../../_components/TopBar';
-import { fetchQuizById } from '../../../../../lib/db';
 import clsx from 'clsx';
 import * as Progress from 'react-native-progress';
-import RippleButton from '../../../../_components/RippleButton';
-import Button from '../../../../_components/Button';
 import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
+import { Quiz } from '../../../../../../types/quiz';
+import { TopBar } from '../../../../../_components/TopBar';
+import { fetchQuizById } from '../../../../../../lib/db';
+import RippleButton from './../../../../../_components/RippleButton';
+import Button from '../../../../../_components/Button';
 
-export default function QuestionPage() {
+export default function SummaryPage() {
   const { question, id } = useLocalSearchParams<{
     question: string;
     id: string;
@@ -152,7 +152,7 @@ export default function QuestionPage() {
           {quiz &&
             question &&
             quiz?.questionsData[Number(question) - 1].options.map(
-              (option, i) => (
+              (option: any, i: number) => (
                 <Animated.View
                   entering={FadeInDown.duration(1000)
                     .springify()
