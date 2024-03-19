@@ -91,7 +91,7 @@ export default function QuestionPage() {
     const nextQuestionNumber = Number(question) + 1;
 
     if (Number(quiz?.questions) < nextQuestionNumber) {
-      router.push(`quiz/${quiz?.id}/${nextQuestionNumber}/summary`);
+      router.push(`quiz/${quiz?.id}/${nextQuestionNumber}/summary?correct=${correctAnswers}&mistake=${mistakeAnswers}`);
     } else {
       router.push(`quiz/${quiz?.id}/${nextQuestionNumber}`);
     }

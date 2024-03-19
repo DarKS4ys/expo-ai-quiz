@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams, useNavigation } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Image, Pressable, SafeAreaView, Text, View } from 'react-native';
+import { Image, Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { fetchQuizById } from '../../../../lib/db';
 import { Quiz } from '../../../../types/quiz';
 import clsx from 'clsx';
@@ -51,7 +51,7 @@ export default function QuizPage() {
   }, [id]);
 
   return (
-    <SafeAreaView
+    <ScrollView
       className={clsx(
         'h-full px-6 py-4',
         isDarkMode ? 'bg-[#0F0F0F]' : 'bg-[#FAFAFA]'
@@ -106,7 +106,7 @@ export default function QuizPage() {
           </Text>
         </View>
 
-        <View className="space-y-2">
+        <View className="space-y-2 mb-8">
           {quiz?.questionsData.map((question, i) => (
             <Animated.View
               entering={FadeInDown.duration(1000).springify().delay(250 + i * 100)}
@@ -124,6 +124,6 @@ export default function QuizPage() {
           ))}
         </View>
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 }
