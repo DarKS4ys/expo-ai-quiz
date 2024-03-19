@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Intelli",
-    "slug": "intelli",
+    "slug": "ai-quiz",
     "scheme": "intelli",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,7 +21,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#442574"
       },
       "package": "com.darks4ys.aiquiz"
     },
